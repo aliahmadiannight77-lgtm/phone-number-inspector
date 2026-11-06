@@ -1,75 +1,77 @@
-# بررسی‌گر شماره تلفن
+# Phone Number Inspector
 
-برنامه‌ای دسکتاپ و فارسی برای بررسی قالب و فراداده‌های عمومی طرح شماره‌گذاری تلفن. اطلاعات شماره با کتابخانهٔ محلی `phonenumbers` پردازش می‌شود و به هیچ سرویس یا سروری فرستاده نمی‌شود.
+A Persian-friendly desktop application for checking phone-number formats and public numbering-plan metadata. Numbers are processed locally with the `phonenumbers` library and are never sent to a service or server.
 
-## قابلیت‌ها
+## Features
 
-- بررسی جداگانهٔ معتبر بودن الگوی شماره و امکان‌پذیری طول آن
-- پشتیبانی از ارقام فارسی و عربی و قالب‌های رایج شماره
-- انتخاب کشور پیش‌فرض برای شماره‌های بدون کد کشور؛ ایران به‌صورت پیش‌فرض انتخاب شده است
-- نمایش کد کشور، منطقهٔ احتمالی، نوع خط و منطقه‌های زمانی احتمالی
-- نمایش قالب ملی، بین‌المللی و استاندارد E.164 و امکان کپی قالب E.164
-- اجرای بررسی با کلید Enter و پاک‌کردن فرم با Ctrl+L
-- بدون نیاز به اینترنت پس از نصب وابستگی
+- Checks number validity and whether its length is possible
+- Accepts Persian, Arabic, and Western digits, as well as common phone-number punctuation
+- Lets you select a default region for numbers without a country code (Iran is selected by default)
+- Displays the country calling code, likely region, line type, possible time zones, and carrier metadata when available
+- Shows national, international, and E.164 formats, with an option to copy the E.164 number
+- Supports Enter to analyze and Ctrl+L to clear the form
+- Works offline after its dependency has been installed
 
-## پیش‌نیازها
+## Requirements
 
-- Python نسخهٔ 3.10 یا جدیدتر
-- Tkinter (در نصب‌کنندهٔ رسمی Python برای Windows معمولاً همراه Python نصب می‌شود)
+- Python 3.10 or later
+- Tkinter (included with the standard Python installer on Windows in most cases)
 
-## نصب و اجرا
+## Install and run
 
-ابتدا در پوشهٔ پروژه محیط مجازی بسازید و وابستگی را نصب کنید:
+Create a virtual environment in the project directory:
 
 ```bash
 python -m venv .venv
 ```
 
-فعال‌سازی محیط مجازی در Windows:
+Activate it on Windows:
 
 ```powershell
 .\.venv\Scripts\Activate.ps1
 ```
 
-در macOS یا Linux:
+On macOS or Linux:
 
 ```bash
 source .venv/bin/activate
 ```
 
-سپس در همهٔ سیستم‌عامل‌ها:
+Then install the dependency and start the app:
 
 ```bash
 python -m pip install -r requirements.txt
 python app.py
 ```
 
-## استفاده
+## Usage
 
-شماره را وارد کنید. برای شمارهٔ ملی، کشور پیش‌فرض را انتخاب کنید؛ تنظیم آغازین ایران است. شماره‌ای که با `+` و کد کشور آغاز شود، مستقل از کشور پیش‌فرض تفسیر می‌شود. برای نمونه:
+Enter a phone number and choose a default region for national-format numbers. The default region is Iran. Numbers prefixed with `+` and a country calling code are parsed independently of the selected default region.
 
-- شمارهٔ ملی ایران: `۰۹۱۲۱۲۳۴۵۶۷`
-- قالب بین‌المللی: `+989121234567`
+Examples:
 
-## اجرای آزمون‌ها
+- Iranian national format: `09121234567`
+- International format: `+989121234567`
+
+## Run the tests
 
 ```bash
 python -m unittest discover -s tests -v
 ```
 
-## ساختار پروژه
+## Project structure
 
 ```text
-app.py                     رابط کاربری Tkinter
-phone_inspector.py         منطق پردازش و فرادادهٔ شماره
-tests/test_phone_inspector.py
-requirements.txt
+app.py                         Tkinter desktop interface
+phone_inspector.py             Number parsing and metadata
+tests/test_phone_inspector.py  Focused unit tests
+requirements.txt               Python dependencies
 ```
 
-## محدودیت‌ها و حریم خصوصی
+## Limitations and privacy
 
-- معتبر بودن شماره فقط یعنی قالب با طرح شماره‌گذاری شناخته‌شده مطابقت دارد؛ این موضوع فعال‌بودن شماره یا تعلق آن به شخص خاصی را تأیید نمی‌کند.
-- کشور، نوع خط، منطقهٔ زمانی و نام اپراتور، در صورت نمایش، فرادادهٔ طرح شماره‌گذاری هستند. این اطلاعات ممکن است ناقص یا قدیمی باشند؛ انتقال شماره بین اپراتورها نیز می‌تواند نام اپراتور را نادقیق کند.
-- منطقهٔ نمایش‌داده‌شده مکان زنده یا دقیق صاحب شماره نیست. از شماره نمی‌توان نشانی، موقعیت فعلی یا هویت مشترک را استخراج کرد.
-- برنامه استعلام زنده، ارسال پیام، دسترسی به مخاطبان یا تاریخچهٔ جست‌وجو ندارد. شماره فقط هنگام واردشدن در حافظهٔ همان فرایند استفاده می‌شود و به شبکه ارسال نمی‌شود.
-- پس از نصب کتابخانه، تحلیل و اعتبارسنجی به‌صورت محلی انجام می‌شود. دریافت نسخه‌های جدید کتابخانه هنگام نصب به اتصال اینترنت نیاز دارد.
+- A valid result means that the number matches a recognized numbering plan. It does not confirm that the number is active or belongs to a particular person.
+- Region, line type, time zone, and carrier (when available) are numbering-plan metadata. They may be incomplete or out of date; number portability can also make carrier information inaccurate.
+- The displayed region is not the subscriber's live or precise location. A phone number cannot reveal a street address, current location, or subscriber identity.
+- The app does not perform live lookups, send messages, access contacts, or keep a search history. A number is held in the local process while you use the app and is not transmitted over the network.
+- Once the library is installed, parsing and validation are performed locally. Internet access is needed to download or update the dependency during installation.
